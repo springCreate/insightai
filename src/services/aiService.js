@@ -40,7 +40,7 @@ async function callOpenAI(input) {
     return JSON.parse(content)
   } catch (err) {
     if (err.message.includes('Failed to fetch')) {
-      throw new Error('API 连接失败。部署版会自动使用同域代理，本地开发请运行 npm run start')
+      throw new Error('API 连接失败，请检查网络或代理设置')
     }
     throw err
   }
