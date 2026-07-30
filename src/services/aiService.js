@@ -1,4 +1,4 @@
-﻿const API_ENDPOINT = "/api/chat"
+﻿const API_ENDPOINT = "https://api.deepseek.com/v1/chat/completions"
 
 async function callDeepSeek(input) {
   const apiKey = localStorage.getItem("openai_api_key")
