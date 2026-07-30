@@ -17,6 +17,11 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - name: Create Pages project (ignore if exists)
+        run: npx wrangler pages project create insightai --production-branch main || true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
       - name: Deploy to Cloudflare Pages
         run: npx wrangler pages deploy dist --project-name=insightai
         env:
