@@ -1,4 +1,6 @@
-const API_ENDPOINT = "https://api.deepseek.com/v1/chat/completions"
+const fs = require("fs");
+
+const content = `const API_ENDPOINT = "https://api.deepseek.com/v1/chat/completions"
 
 async function callDeepSeek(input) {
   const apiKey = localStorage.getItem("openai_api_key")
@@ -6,7 +8,7 @@ async function callDeepSeek(input) {
 
   const systemPrompt = "You are a senior AI product manager and product strategy analyst. Analyze the product idea and output structured insights in JSON format only. All output must be in Chinese language."
 
-  const userMessage = "Analyze this product idea:\nProduct: " + (input.productIdea || "N/A") + "\nTarget users: " + (input.targetUsers || "N/A") + "\nPain points: " + (input.painPoints || "N/A") + "\nIndustry: " + (input.industry || "N/A")
+  const userMessage = "Analyze this product idea:\\nProduct: " + (input.productIdea || "N/A") + "\\nTarget users: " + (input.targetUsers || "N/A") + "\\nPain points: " + (input.painPoints || "N/A") + "\\nIndustry: " + (input.industry || "N/A")
 
   try {
     const response = await fetch(API_ENDPOINT, {
@@ -42,3 +44,7 @@ async function callDeepSeek(input) {
 export async function analyzeProduct(input) {
   return await callDeepSeek(input)
 }
+`;
+
+fs.writeFileSync("src/services/aiService.js", content, "utf8");
+console.log("DONE");
