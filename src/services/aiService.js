@@ -9,9 +9,19 @@ async function callDeepSeek(input) {
   let targetUrl = localStorage.getItem("proxy_url") || API_ENDPOINT
 
   const systemPrompt =
-    "You are a senior AI product manager. Analyze the product idea and output structured insights in JSON format only: {\"marketAnalysis\":{\"summary\":\"summary\",\"tam\":\"TAM\",\"sam\":\"SAM\",\"som\":\"SOM\",\"trends\":[{\"title\":\"trend\",\"description\":\"desc\"}],\"competitors\":[{\"name\":\"name\",\"strength\":\"strength\",\"weakness\":\"weakness\"}]},\"userPersonas\":[{\"name\":\"name\",\"age\":\"age\",\"role\":\"role\",\"background\":\"background\",\"goals\":[\"goal\"],\"painPoints\":[\"pain\"]}],\"featurePrioritization\":[{\"feature\":\"feature\",\"description\":\"desc\",\"rice\":{\"reach\":1,\"impact\":1,\"confidence\":1,\"effort\":1},\"score\":1}],\"mvpScope\":[{\"phase\":\"phase\",\"features\":[\"feature\"],\"goal\":\"goal\"}],\"successMetrics\":{\"okrs\":[{\"objective\":\"objective\",\"keyResults\":[\"KR\"]}],\"kpis\":[{\"metric\":\"metric\",\"target\":\"target\",\"unit\":\"unit\"}]}}"
+    "你是一位资深 AI 产品经理和产品策略分析师。请分析用户提供的产品想法，生成结构化的产品洞察报告，请严格按照以下 JSON 格式输出（只输出 JSON，不要包含其他文字）：\n" +
+    "{\"marketAnalysis\":{\"summary\":\"市场概述（中文）\",\"tam\":\"TAM 总可寻址市场规模数据（中文）\",\"sam\":\"SAM 可服务市场规模数据（中文）\",\"som\":\"SOM 可获取市场规模数据（中文）\",\"trends\":[{\"title\":\"趋势标题（中文）\",\"description\":\"趋势描述（中文）\"}],\"competitors\":[{\"name\":\"竞品名称（中文）\",\"strength\":\"优势（中文）\",\"weakness\":\"劣势（中文）\"}]},\n" +
+    "\"userPersonas\":[{\"name\":\"姓名\",\"age\":\"年龄\",\"role\":\"角色（中文）\",\"background\":\"背景描述（中文）\",\"goals\":[\"目标1（中文）\",\"目标2（中文）\"],\"painPoints\":[\"痛点1（中文）\",\"痛点2（中文）\"]}],\n" +
+    "\"featurePrioritization\":[{\"feature\":\"功能名称（中文）\",\"description\":\"功能描述（中文）\",\"rice\":{\"reach\":1,\"impact\":1,\"confidence\":1,\"effort\":1},\"score\":1}],\n" +
+    "\"mvpScope\":[{\"phase\":\"阶段名称（中文）\",\"features\":[\"功能1（中文）\",\"功能2（中文）\"],\"goal\":\"目标描述（中文）\"}],\n" +
+    "\"successMetrics\":{\"okrs\":[{\"objective\":\"目标（中文）\",\"keyResults\":[\"关键结果1（中文）\",\"关键结果2（中文）\"]}],\"kpis\":[{\"metric\":\"指标名称（中文）\",\"target\":\"目标值\",\"unit\":\"单位\"}]}}"
 
-  const userMessage = "Analyze this product idea: Product: " + (input.productIdea || "N/A") + ", Target users: " + (input.targetUsers || "N/A") + ", Pain points: " + (input.painPoints || "N/A") + ", Industry: " + (input.industry || "N/A")
+  const userMessage =
+    "请分析以下产品想法，**请用中文回复**：\n" +
+    "产品描述：" + (input.productIdea || "未提供") + "\n" +
+    "目标用户：" + (input.targetUsers || "未指定") + "\n" +
+    "要解决的痛点：" + (input.painPoints || "未指定") + "\n" +
+    "所属行业：" + (input.industry || "未指定")
 
   try {
     const response = await fetch(targetUrl, {
