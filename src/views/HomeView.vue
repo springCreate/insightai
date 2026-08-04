@@ -1,123 +1,100 @@
 <template>
   <div class="home">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="tag tag-primary">AI Powered</span>
-            <span class="tag tag-accent">Product Strategy</span>
+    <div class="container">
+      <section class="workspace card">
+        <div class="workspace-head">
+          <div>
+            <h1>用真实网页生成 PRD 草稿</h1>
+            <p>只需输入产品想法，检索、证据整理、PRD 草稿和来源挂载会自动完成。</p>
           </div>
-          <h1 class="hero-title">
-            从想法到洞察<br />
-            <span class="hero-highlight">只需一次输入</span>
-          </h1>
-          <p class="hero-desc">
-            输入你的产品想法，AI 自动生成结构化的市场分析、用户画像、功能优先级评估、
-            MVP 范围建议和成功指标体系——让每一个产品决策都有据可依。
-          </p>
+          <span class="status-chip" :class="keySaved ? 'ready' : 'missing'">
+            {{ keySaved ? '本地检索已配置' : '未配置本地检索' }}
+          </span>
         </div>
-      </div>
-      <div class="hero-bg"></div>
-    </section>
 
-    <section class="form-section">
-      <div class="container">
-        <div class="form-card card">
-          <div class="form-card-header">
-            <h2>开始分析你的产品想法</h2>
-            <p>填写以下信息，AI 将为你生成一份完整的产品洞察报告</p>
+        <form @submit.prevent="startAutoResearch">
+          <div class="form-group">
+            <label class="form-label">产品想法 <span class="required">*</span></label>
+            <textarea v-model="form.productIdea" class="form-textarea" rows="3" maxlength="500" placeholder="例如：一个帮助产品经理自动收集竞品信息并生成 PRD 草稿的工具" required></textarea>
+            <p class="form-hint">{{ form.productIdea.length }}/500</p>
           </div>
-          <form @submit.prevent="handleSubmit" class="form-body">
-            <div class="form-row">
-              <div class="form-group full">
-                <label class="form-label">产品想法 / 一句话描述 <span class="required">*</span></label>
-                <textarea v-model="form.productIdea" class="form-textarea" rows="3" placeholder="例如：一个利用 AI 帮助产品经理快速生成竞品分析报告的工具" required maxlength="500"></textarea>
-                <p class="form-hint">{{ form.productIdea.length }}/500</p>
-              </div>
-            </div>
-            <div class="form-row two-cols">
+
+          <details class="optional-details">
+            <summary>补充可选信息（推荐）</summary>
+            <div class="optional-grid">
               <div class="form-group">
                 <label class="form-label">目标用户群体</label>
-                <input v-model="form.targetUsers" class="form-input" placeholder="例如：互联网产品经理、创业者" />
+                <input v-model="form.targetUsers" class="form-input" placeholder="例如：互联网产品经理" />
               </div>
               <div class="form-group">
                 <label class="form-label">所属行业</label>
-                <select v-model="form.industry" class="form-select">
-                  <option value="">请选择行业</option>
-                  <option value="互联网">互联网</option>
-                  <option value="教育">教育</option>
-                  <option value="医疗健康">医疗健康</option>
-                  <option value="金融">金融</option>
-                  <option value="电商">电商</option>
-                  <option value="企业服务">企业服务</option>
-                  <option value="游戏">游戏</option>
-                  <option value="AI 大模型">AI / 大模型</option>
-                  <option value="物联网">物联网</option>
-                  <option value="其他">其他</option>
-                </select>
+                <input v-model="form.industry" class="form-input" placeholder="例如：企业服务 / AI" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">目标市场</label>
+                <input v-model="form.market" class="form-input" placeholder="例如：中国中小企业市场" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">要解决的痛点</label>
+                <input v-model="form.painPoints" class="form-input" placeholder="例如：竞品调研太慢" />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group full">
-                <label class="form-label">要解决的痛点 / 用户需求</label>
-                <textarea v-model="form.painPoints" class="form-textarea" rows="2" placeholder="描述你的目标用户遇到了什么问题，或者有什么未被满足的需求"></textarea>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group full">
-                <label class="form-label">目标市场（可选）</label>
-                <input v-model="form.market" class="form-input" placeholder="例如：中国中小企业市场、东南亚教育市场" />
-              </div>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary btn-large" :disabled="!form.productIdea.trim() || loading">
-                <template v-if="loading">
-                  <span class="loading-spinner" style="width:18px;height:18px;border-width:2px"></span>
-                  正在分析...
-                </template>
-                <template v-else>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                  开始分析
-                </template>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+          </details>
 
-    <section class="features-section">
-      <div class="container">
-        <h2 class="section-title">你将会得到什么</h2>
-        <div class="features-grid">
-          <div class="feature-card card" v-for="f in features" :key="f.title">
-            <div class="feature-icon" :style="{ background: f.bg }">
-              <span v-html="f.icon"></span>
+          <div v-if="!keySaved" class="key-row">
+            <div class="key-input-wrap">
+              <input v-model="tavilyKey" type="password" class="form-input" placeholder="粘贴 Tavily API Key" />
             </div>
-            <h3>{{ f.title }}</h3>
-            <p>{{ f.desc }}</p>
+            <button type="button" class="btn btn-outline" @click="saveTavilyKey">保存 Key</button>
+            <p class="key-note">Key 仅保存在当前浏览器；正式部署后可改为后端统一配置，用户无需填写。</p>
+          </div>
+          <div v-else class="key-row key-row--saved">
+            <p class="key-note">Tavily Key 已保存在本机浏览器。</p>
+            <button type="button" class="btn btn-outline" @click="resetKey">更换 Key</button>
+          </div>
+
+          <div class="start-row">
+            <button type="submit" class="btn btn-primary btn-large" :disabled="busy || !form.productIdea.trim()">
+              <template v-if="busy">{{ progress || '正在准备...' }}</template>
+              <template v-else>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                开始生成 PRD
+              </template>
+            </button>
+            <button type="button" class="btn btn-outline btn-large" @click="openDemo" :disabled="busy">先看示例</button>
+          </div>
+
+          <p v-if="error" class="inline-error">{{ error }}</p>
+        </form>
+      </section>
+
+      <section v-if="store.history.length" class="history-section">
+        <h2>最近报告</h2>
+        <div class="history-list">
+          <div class="history-item card" v-for="entry in store.history" :key="entry.id">
+            <div class="history-main">
+              <strong>{{ entry.input.productIdea }}</strong>
+              <span class="history-meta">{{ formatTime(entry.createdAt) }} · {{ entry.meta.mode === 'demo' ? '示例报告' : '自动调研' }}</span>
+            </div>
+            <div class="history-actions">
+              <button class="btn btn-outline" @click="openHistory(entry)">查看</button>
+              <button class="btn btn-outline danger-text" @click="store.deleteReport(entry.id)">删除</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <Teleport to="body">
-      <transition name="fade">
-        <div v-if="error" class="toast-error-msg">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-          {{ error }}
-          <button @click="error = ''">&times;</button>
-        </div>
-      </transition>
-    </Teleport>
+      </section>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAnalysisStore } from '../stores/analysis'
-import { analyzeProduct } from '../services/aiService'
+import { generateDemoReport, generateGroundedPrd } from '../services/aiService'
+import { buildEvidenceReport } from '../services/evidenceService'
+import { runResearch } from '../services/researchService'
+import { trackEvent } from '../utils/report'
 
 const router = useRouter()
 const store = useAnalysisStore()
@@ -130,120 +107,147 @@ const form = reactive({
   market: ''
 })
 
-const loading = ref(false)
+const tavilyKey = ref(localStorage.getItem('tavily_api_key') || '')
+const keySaved = ref(Boolean(localStorage.getItem('tavily_api_key') || ''))
+const busy = ref(false)
 const error = ref('')
+const progress = ref('')
 
-const features = ref([
-  {
-    title: '市场分析',
-    desc: 'TAM/SAM/SOM 市场规模估算、行业趋势洞察、竞品格局分析',
-    bg: 'rgba(99,102,241,0.1)',
-    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><line x1="18" y1="12" x2="18" y2="17"/></svg>'
-  },
-  {
-    title: '用户画像',
-    desc: 'AI 生成 2-3 个典型用户画像，包含背景、目标和痛点',
-    bg: 'rgba(6,182,212,0.1)',
-    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
-  },
-  {
-    title: '功能优先级',
-    desc: '基于 RICE 框架量化评分（覆盖度、影响力、信心度、工作量）',
-    bg: 'rgba(16,185,129,0.1)',
-    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
-  },
-  {
-    title: 'MVP 路线图',
-    desc: '分阶段的产品迭代规划，明确每个阶段的交付目标和验证指标',
-    bg: 'rgba(245,158,11,0.1)',
-    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><polyline points="4 17 10 11 14 15 20 9"/><polyline points="14 9 20 9 20 15"/></svg>'
-  },
-  {
-    title: '成功指标体系',
-    desc: 'OKR 目标和关键结果 + 核心 KPI 看板，量化产品成功标准',
-    bg: 'rgba(239,68,68,0.1)',
-    icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'
-  }
-])
-
-async function handleSubmit() {
-  if (!form.productIdea.trim()) return
-  loading.value = true
+function saveTavilyKey() {
+  const key = tavilyKey.value.trim()
+  localStorage.setItem('tavily_api_key', key)
+  keySaved.value = Boolean(key)
   error.value = ''
+}
 
-  store.setInput({ ...form })
-  store.clearAnalysis()
+function resetKey() {
+  localStorage.removeItem('tavily_api_key')
+  tavilyKey.value = ''
+  keySaved.value = false
+}
 
+function formatTime(iso) {
+  if (!iso) return ''
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) return ''
+  return date.toLocaleString('zh-CN', { hour12: false })
+}
+
+async function openDemo() {
+  if (busy.value) return
+  busy.value = true
+  error.value = ''
   try {
-    const result = await analyzeProduct({ ...form })
-    store.setResult(result)
+    const demo = generateDemoReport({ ...form })
+    store.saveReport({
+      input: { ...form, productIdea: form.productIdea.trim() || 'AI 驱动的产品洞察平台' },
+      result: demo.report,
+      meta: demo.meta
+    })
     router.push('/results')
   } catch (err) {
-    error.value = err.message || '分析失败，请重试'
+    error.value = err.message || '示例报告生成失败，请重试'
   } finally {
-    loading.value = false
+    busy.value = false
   }
+}
+
+async function startAutoResearch() {
+  if (!form.productIdea.trim() || busy.value) return
+  const apiKey = tavilyKey.value.trim() || localStorage.getItem('tavily_api_key') || ''
+  if (apiKey) {
+    localStorage.setItem('tavily_api_key', apiKey)
+    keySaved.value = true
+  }
+
+  busy.value = true
+  error.value = ''
+  progress.value = '正在准备检索词'
+  store.setInput({ ...form })
+  store.clearAnalysis()
+  trackEvent('analysis_started', {
+    ideaLength: form.productIdea.length,
+    fieldCount: Object.values(form).filter(Boolean).length
+  })
+
+  try {
+    const items = await runResearch({ ...form }, apiKey, (label) => {
+      progress.value = `正在检索：${label}`
+    })
+
+    if (items.length === 0) {
+      error.value = '没有检索到可用网页资料，请换个产品描述或稍后重试。'
+      return
+    }
+
+    const deepseekKey = localStorage.getItem('openai_api_key') || ''
+    let result
+    if (deepseekKey) {
+      progress.value = 'DeepSeek 正在生成完整 PRD 草稿'
+      result = await generateGroundedPrd({ ...form }, items)
+    } else {
+      const fallback = buildEvidenceReport({ ...form }, items)
+      result = {
+        report: fallback.report,
+        meta: { ...fallback.meta, deepseekMissing: true }
+      }
+    }
+    store.saveReport({
+      input: { ...form },
+      result: result.report,
+      meta: result.meta
+    })
+    router.push('/results')
+  } catch (err) {
+    error.value = err.message || '自动检索失败，请检查 Key 和网络后重试'
+  } finally {
+    busy.value = false
+    progress.value = ''
+  }
+}
+
+function openHistory(entry) {
+  store.openReport(entry)
+  router.push('/results')
 }
 </script>
 
 <style scoped>
-.home { padding-bottom: 60px; }
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 60px 0 40px;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(99,102,241,0.04) 0%, rgba(6,182,212,0.04) 100%);
-  z-index: -1;
-}
-
-.hero-content { text-align: center; max-width: 680px; margin: 0 auto; }
-.hero-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; }
-.hero-title { font-size: 40px; font-weight: 800; line-height: 1.2; color: var(--gray-900); margin-bottom: 16px; }
-.hero-highlight {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-desc { font-size: 16px; color: var(--gray-500); line-height: 1.7; margin: 0 auto; }
-
-.form-section { padding: 0 0 40px; }
-.form-card { max-width: 720px; margin: 0 auto; overflow: hidden; }
-.form-card-header { padding: 28px 32px 0; }
-.form-card-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.form-card-header p { font-size: 14px; color: var(--gray-500); }
-.form-body { padding: 24px 32px 32px; }
-.form-row { width: 100%; }
-.form-row.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.required { color: var(--danger); }
-.form-actions { margin-top: 8px; }
-.btn-large { width: 100%; padding: 14px 24px; font-size: 16px; justify-content: center; }
-
-.features-section { padding: 40px 0; }
-.section-title { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 28px; }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1060px; margin: 0 auto; }
-.feature-card { padding: 24px; text-align: center; transition: 0.2s ease; }
-.feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.feature-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin: 0 auto 14px; }
-.feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.feature-card p { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
-
-.toast-error-msg {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 10px; padding: 12px 20px;
-  border-radius: var(--radius); font-size: 14px; box-shadow: var(--shadow-lg); z-index: 300;
-  background: #fef2f2; color: var(--danger); border: 1px solid #fecaca;
-}
+.home { padding: 40px 0 60px; }
+.workspace { max-width: 860px; margin: 0 auto; padding: 28px; }
+.workspace-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.workspace-head h1 { font-size: 26px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px; }
+.workspace-head p { font-size: 14px; color: var(--gray-500); }
+.status-chip { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.status-chip.ready { background: #ecfdf5; color: #047857; }
+.status-chip.missing { background: #fffbeb; color: #b45309; }
+.optional-details { margin-bottom: 20px; }
+.optional-details summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--gray-600); margin-bottom: 12px; }
+.optional-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.key-row { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; padding: 14px; background: var(--gray-50); border-radius: var(--radius); }
+.key-row--saved { align-items: center; justify-content: space-between; }
+.key-input-wrap { flex: 1; min-width: 240px; }
+.key-note { width: 100%; font-size: 12px; color: var(--gray-400); margin: 0; }
+.start-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.start-row .btn-large { flex: 1; min-width: 220px; }
+.inline-error { margin-top: 12px; color: var(--danger); font-size: 13px; }
+.history-section { max-width: 860px; margin: 32px auto 0; }
+.history-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.history-list { display: flex; flex-direction: column; gap: 10px; }
+.history-item { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; }
+.history-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.history-main strong { font-size: 14px; color: var(--gray-800); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-meta { font-size: 12px; color: var(--gray-400); }
+.history-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.danger-text { color: var(--danger); }
+.danger-text:hover { border-color: var(--danger); color: var(--danger); }
 
 @media (max-width: 600px) {
-  .hero-title { font-size: 28px; }
-  .form-body { padding: 20px; }
-  .form-row.two-cols { grid-template-columns: 1fr; }
+  .home { padding: 20px 0 40px; }
+  .workspace { padding: 20px; }
+  .workspace-head { flex-direction: column; }
+  .optional-grid { grid-template-columns: 1fr; }
+  .start-row { flex-direction: column; }
+  .history-item { flex-direction: column; align-items: flex-start; }
 }
 </style>

@@ -27,13 +27,26 @@
             <div class="form-group">
               <label class="form-label">DeepSeek API Key</label>
               <input type="password" class="form-input" v-model="apiKey" placeholder="sk-..." />
+              <p class="form-hint" style="line-height:1.6">
+                Key 只保存在当前浏览器 localStorage，不会上传到本项目服务端。
+                正式产品建议改为后端统一托管，避免页面脚本读取用户 Key。
+              </p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tavily API Key（自动检索）</label>
+              <input type="password" class="form-input" v-model="tavilyKey" placeholder="tvly-..." />
+              <p class="form-hint" style="line-height:1.6">
+                仅本地开发需要填写；正式部署后由服务端环境变量 TAVILY_API_KEY 统一提供，用户无需填写。
+              </p>
             </div>
             <div class="form-group">
               <label class="form-label">API 代理地址</label>
               <input type="text" class="form-input" v-model="proxyUrl" placeholder="留空则直连 DeepSeek" />
               <p class="form-hint" style="line-height:1.6">
-                中国用户推荐：先在本地终端运行 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">npm run serve</code>，然后在框中填入 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">http://localhost:3001/api/chat</code>。<br/><br/>
-                <strong>本地完整运行：</strong><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">npm run start</code> 打开 http://localhost:5173
+                填写后会作为 AI 请求地址。中国用户可以先在本地运行
+                <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">npm run serve</code>，
+                然后填入 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">http://localhost:3001/api/chat</code>。<br/><br/>
+                <strong>本地完整运行：</strong><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px">npm run local</code> 打开 http://localhost:5173（同时启动 API 服务 3001）
               </p>
             </div>
           </div>
@@ -48,18 +61,28 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { trackEvent } from '../utils/report'
+
 const showSettings = ref(false)
 const apiKey = ref('')
 const proxyUrl = ref('')
+const tavilyKey = ref('')
 
 onMounted(() => {
   apiKey.value = localStorage.getItem('openai_api_key') || ''
   proxyUrl.value = localStorage.getItem('proxy_url') || ''
+  tavilyKey.value = localStorage.getItem('tavily_api_key') || ''
 })
 
 function saveSettings() {
   localStorage.setItem('openai_api_key', apiKey.value)
   localStorage.setItem('proxy_url', proxyUrl.value)
+  localStorage.setItem('tavily_api_key', tavilyKey.value)
+  trackEvent('api_key_configured', {
+    hasKey: Boolean(apiKey.value),
+    hasProxy: Boolean(proxyUrl.value),
+    hasTavily: Boolean(tavilyKey.value)
+  })
   showSettings.value = false
 }
 </script>
