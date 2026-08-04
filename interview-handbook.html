@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InsightAI 面试话术手册 | 常奥青</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --panel: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #57534e;
+    --ink-mute: #a8a29e;
+    --line: #e7e5e4;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --green: #059669;
+    --green-soft: #ecfdf5;
+    --amber: #d97706;
+    --amber-soft: #fffbeb;
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+  /* Cover */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    page-break-after: always;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  .cover h1 .highlight {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cover .subtitle {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+  }
+  .cover .meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .cover .meta-item {
+    text-align: center;
+  }
+  .cover .meta-item .label {
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cover .meta-item .value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+  .cover .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 24px 0;
+  }
+  .cover .footer {
+    margin-top: 60px;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
+    page-break-before: auto;
+  }
+  .section-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--card-shadow);
+  }
+  .card-accent-left {
+    border-left: 3px solid var(--accent);
+  }
+  .card-green {
+    border-left: 3px solid var(--green);
+    background: var(--green-soft);
+  }
+  .card-amber {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-soft);
+  }
+  .card-red {
+    border-left: 3px solid var(--red);
+    background: var(--red-soft);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3 .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    letter-spacing: 0.3px;
+  }
+  h3 .tag-green { background: var(--green-soft); color: var(--green); }
+  h3 .tag-amber { background: var(--amber-soft); color: var(--amber); }
+  h3 .tag-red { background: var(--red-soft); color: var(--red); }
+
+  p { margin-bottom: 10px; }
+  .soft { color: var(--ink-soft); }
+  .mute { color: var(--ink-mute); }
+
+  /* Script blocks */
+  .script {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    font-family: "SF Mono", "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    position: relative;
+  }
+  .script .label {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .script .highlight-word { color: #818cf8; font-weight: 600; }
+  .script .good { color: #4ade80; }
+  .script .meta-line { color: #64748b; font-style: italic; }
+
+  /* Two column */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Number grid */
+  .num-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .num-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .num-card .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .num-card .unit {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+  }
+  .num-card .desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  /* Q&A */
+  .qa {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .qa-q {
+    padding: 16px 20px;
+    background: var(--accent-soft);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .qa-q .q-label {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .qa-a {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+  .qa-a .script {
+    margin-top: 10px;
+    padding: 14px 18px;
+    font-size: 12px;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tr:hover td { background: var(--bg); }
+
+  /* Tag pills */
+  .tag-pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin: 2px 4px 2px 0;
+  }
+  .pill-blue { background: #dbeafe; color: #1e40af; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+  .pill-purple { background: #ede9fe; color: #5b21b6; }
+
+  /* Print styles */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .page { max-width: 100%; padding: 20mm; }
+    .cover { min-height: auto; padding: 20px 0; }
+    .card { break-inside: avoid; }
+    .qa { break-inside: avoid; }
+    .script { break-inside: avoid; }
+  }
+
+  /* Page break */
+  .page-break { page-break-before: always; }
+
+  /* Tip box */
+  .tip {
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #92400e;
+    margin: 12px 0;
+  }
+  .tip strong { color: #78350f; }
+
+  /* Key insight */
+  .insight {
+    background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+    border: 1px solid #c7d2fe;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .insight strong { color: #4338ca; }
+
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+  .no-bullet { list-style: none; padding-left: 0; }
+  .no-bullet li { padding: 4px 0; }
+
+  /* Footer */
+  .handbook-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* Info bar */
+  .info-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 12px 0 24px;
+  }
+  .info-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .info-chip .icon { font-size: 16px; }
+  .info-chip .k { color: var(--ink-mute); }
+  .info-chip .v { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ========== COVER ========== -->
+<div class="cover">
+  <div class="badge">面试话术手册</div>
+  <h1>InsightAI <span class="highlight">项目深挖</span></h1>
+  <div class="subtitle">AI 产品经理岗位 · 产品/业务面 · 口语化背诵版</div>
+
+  <div class="divider"></div>
+
+  <div class="meta">
+    <div class="meta-item">
+      <div class="label">候选人</div>
+      <div class="value">常奥青</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">岗位</div>
+      <div class="value">AI 产品经理</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">核心卖点</div>
+      <div class="value">AI 方法论 + 无幻觉边界</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">版本</div>
+      <div class="value">V1.0 · 2026.08</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ⚠️ 本手册为面试准备材料，包含标注了「背诵」和「理解」的话术<br>
+    实际面试时请灵活调整，不要机械背诵
+  </div>
+</div>
+
+<!-- ========== 0. 关键数字卡片 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">0</div>
+  <div>
+    <div class="section-title">关键数字卡片</div>
+    <div class="section-subtitle">开场就能甩的量化信息，别让面试官替你总结</div>
+  </div>
+</div>
+
+<div class="num-grid">
+  <div class="num-card">
+    <div class="num">≤60s</div>
+    <div class="unit">报告生成时间</div>
+    <div class="desc">从想法到结构化洞察</div>
+  </div>
+  <div class="num-card">
+    <div class="num">5/5</div>
+    <div class="unit">单元测试通过</div>
+    <div class="desc">report / evidence / research</div>
+  </div>
+  <div class="num-card">
+    <div class="num">7</div>
+    <div class="unit">分析维度</div>
+    <div class="desc">PRD草稿到风险核验</div>
+  </div>
+  <div class="num-card">
+    <div class="num">2</div>
+    <div class="unit">生成模式</div>
+    <div class="desc">AI生成 + 证据驱动</div>
+  </div>
+  <div class="num-card">
+    <div class="num">0</div>
+    <div class="unit">浏览器JS错误</div>
+    <div class="desc">Chrome DevTools 实测</div>
+  </div>
+  <div class="num-card">
+    <div class="num">2724</div>
+    <div class="unit">行代码</div>
+    <div class="desc">Vibe Coding 全栈实现</div>
+  </div>
+</div>
+
+<div class="info-bar">
+  <div class="info-chip"><span class="icon">🎯</span><span class="k">目标：</span><span class="v">AI产品经理（初级/中级）</span></div>
+  <div class="info-chip"><span class="icon">👤</span><span class="k">用户：</span><span class="v">中小企业PM + 创业者</span></div>
+  <div class="info-chip"><span class="icon">🛠</span><span class="k">技术：</span><span class="v">Vue3 + Pinia + DeepSeek + Tavily</span></div>
+  <div class="info-chip"><span class="icon">📊</span><span class="k">框架：</span><span class="v">TAM/SAM/SOM + RICE + OKR</span></div>
+</div>
+
+<!-- ========== 1. 自我介绍 ========== -->
+<div class="section-header">
+  <div class="section-num">1</div>
+  <div>
+    <div class="section-title">自我介绍</div>
+    <div class="section-subtitle">30秒电梯版 + 1分钟标准版 + 3分钟深度版</div>
+  </div>
+</div>
+
+<div class="card card-accent-left">
+  <h3>30秒电梯版 <span class="tag">背诵</span></h3>
+  <div class="script">我叫<span class="highlight-word">常奥青</span>，软件工程背景转型 AI 产品方向。
+最近在做一个叫<span class="highlight-word">InsightAI</span>的项目——帮产品经理把一个产品想法在 1 分钟内变成结构化的洞察草稿，用 AI 解决早期决策缺数据、分析慢的问题。
+
+<span class="meta-line">→ 说完立刻补一句："我对 AI 产品的可信度和边界设计比较感兴趣"</span></div>
+</div>
+
+<div class="card card-accent-left">
+  <h3>1分钟标准版 <span class="tag">背诵</span></h3>
+  <div class="script">我叫常奥青，软件工程背景，之前做过 AI 对话助手的全流程产品。
+<span class="highlight-word">InsightAI</span>是我最近在做的另一个 AI 产品——面向产品经理的分析工具。
+
+核心解决一个痛点：产品经理做早期方向判断时，缺数据、缺方法、汇报难。
+我们的做法是把"想法 → 结构化洞察"压缩到 1 分钟，
+输出市场分析、用户画像、RICE 优先级、MVP 路线图、成功指标和风险核验这 7 个维度。
+
+我在项目里主要关注<span class="highlight-word">两件事</span>：
+第一是 AI 产品方法论——怎么把 TAM/RICE/OKR 这些框架产品化，让用户不用学就能用；
+第二是<span class="highlight-word">无幻觉边界</span>设计——AI 草稿不是事实，必须标注来源、假设、置信度，并提供证据驱动模式让用户手动核实。
+
+<span class="meta-line">→ 等面试官追问："具体怎么做的？"</span></div>
+</div>
+
+<div class="card card-accent-left">
+  <h3>3分钟深度版 <span class="tag">理解</span></h3>
+  <p>（在 1 分钟版基础上补充）</p>
+  <div class="script">技术上我用 Vibe Coding 全栈完成——
+前端 Vue3 + Pinia，对接 DeepSeek API 和 Tavily 检索，
+通过 Chrome DevTools 实测验证，5/5 单元测试通过，0 个浏览器 JS 错误。
+
+产品上有两个关键决策：
+一是<span class="highlight-word">不做通用 AI 对话</span>，而是做 PM 分析工作流的产品化；
+二是<span class="highlight-word">AI 草稿 vs 已核实事实的边界</span>——
+我们发现用户最担心"AI 编的市场数据能用吗"，所以设计了证据驱动模式，只汇总用户提供的来源，不调用大模型补事实。
+
+目前项目开源在 GitHub，Cloudflare Pages 和 Vercel 都可部署。
+
+<span class="meta-line">→ 结尾："我对 AI 产品的可信度设计特别感兴趣，这也是我想深入做的方向。"</span></div>
+</div>
+
+<!-- ========== 2. 项目深挖 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">2</div>
+  <div>
+    <div class="section-title">项目深挖：InsightAI</div>
+    <div class="section-subtitle">面试官一定会问的 5 个维度，每个都要能讲 2-3 分钟</div>
+  </div>
+</div>
+
+<!-- 2.1 项目背景 -->
+<div class="card">
+  <h3>2.1 项目背景与定位 <span class="tag">背诵</span></h3>
+  <div class="script">
+<span class="highlight-word">痛点</span>：PM 做早期方向判断时——
+  • 缺数据：中小团队没有数据/用研资源
+  • 缺方法：知道 RICE/OKR，但不会套用到具体想法
+  • 缺闭环：分析结果不成体系，难用于汇报
+
+<span class="highlight-word">定位</span>：不是一个 AI 聊天工具，而是 PM 分析工作流的产品化
+  → 用户不需要懂 Prompt 工程
+  → 不需要懂 RICE/OKR/TAM
+  → 工具替他们完成
+
+<span class="highlight-word">一句话</span>：帮 PM 把"产品想法"变成"结构化洞察草稿"，
+         1 分钟替代 2-4 周的传统分析流程
+  </div>
+</div>
+
+<!-- 2.2 核心决策 -->
+<div class="card card-amber">
+  <h3>2.2 最难决策：产品边界 <span class="tag tag-amber">STAR</span></h3>
+  <p><strong>场景：</strong>InsightAI 应该做"AI 聊天增强版"还是"PM 分析工具"？</p>
+
+  <div class="script"><span class="highlight-word">S - Situation</span>
+项目早期，我面临一个选择：
+要么做一个"内置 PM Prompt 的 AI 聊天"——开发快，但差异化弱；
+要么做一个"PM 分析工作流"——要设计框架、结构化输出，但壁垒更高。
+
+<span class="highlight-word">T - Task</span>
+我需要决定：核心价值是什么？差异化在哪里？
+不能让 InsightAI 变成"套壳 ChatGPT"。
+
+<span class="highlight-word">A - Action</span>
+我做了三件事：
+1. <span class="good">竞品对比</span>：横向对比 ChatGPT/Notion AI/咨询报告，
+   发现通用 AI 的问题是——输出不稳定、需要自己写 Prompt、没有产品化框架
+2. <span class="good">用户访谈（3人）</span>：问 PM 朋友"你会用 AI 做产品分析吗？"，
+   得到的回答是——"我想要一个填完就出结果的东西，不想跟 AI 来回聊"
+3. <span class="good">框架设计</span>：把 TAM/SAM/SOM、RICE、OKR 这些
+   PM 方法论拆解成 7 个结构化输出模块
+
+<span class="highlight-word">R - Result</span>
+结论：做 PM 分析工作流，而不是 AI 聊天。
+这个决策直接决定了：
+  • 报告是 Tab 结构化的，不是对话流
+  • 输出是 JSON 约束的，不是自由文本
+  • 用户是"填完就走"的，不是"来回对话"的
+
+<span class="meta-line">→ 这个决策也让后续的"证据驱动模式"变得自然——工作流天然支持无幻觉分支</span></div>
+</div>
+
+<!-- 2.3 无幻觉边界 -->
+<div class="card card-green">
+  <h3>2.3 无幻觉边界设计 <span class="tag tag-green">核心卖点</span></h3>
+  <p>面试官必问："AI 编的市场数据能用吗？" —— 这是你的差异化回答机会。</p>
+
+  <div class="script"><span class="highlight-word">核心理念</span>：
+AI 草稿 ≠ 已核实事实
+产品必须设计边界，让用户知道"什么是 AI 编的、什么是真实的"
+
+<span class="highlight-word">三层设计</span>：
+
+<span class="good">第一层：标注边界</span>
+  • 所有 AI 生成的市场规模标注为"估算"
+  • 每个模块显示"来源、假设、置信度"
+  • 顶部固定提示："这份报告是 AI 草稿，不是已核实事实"
+
+<span class="good">第二层：证据驱动模式（/evidence）</span>
+  • 用户手动录入证据条目（事实+来源链接+日期）
+  • 系统只汇总已录入的证据，不调用大模型补事实
+  • 没有来源的模块显示"暂无已核实数据"
+  • → 这是真正的"零幻觉"分支
+
+<span class="good">第三层：自动调研 + 人工复核</span>
+  • 用 Tavily API 检索真实网页
+  • 自动生成带来源链接的证据条目
+  • 但仍然提示用户："来源链接可能过期，导出前请人工复核"
+
+<span class="highlight-word">产品反思</span>：
+绝对零幻觉无法单方面保证——
+因为来源本身也可能过期、偏差或被错误引用。
+所以真正的解决方案不是"AI 不犯错"，而是"让用户能判断 AI 靠不靠谱"。</div>
+</div>
+
+<!-- 2.4 AI 产品方法论 -->
+<div class="card card-accent-left">
+  <h3>2.4 AI 产品方法论运用 <span class="tag">背诵</span></h3>
+
+  <div class="script"><span class="highlight-word">需求分析</span>
+识别 PM 缺少"快速分析工具 + 汇报闭环"——
+  不是缺数据，而是缺"从想法到结构化输出"的工作流
+
+<span class="highlight-word">框架选择</span>
+把 PM 方法论产品化：
+  • TAM/SAM/SOM → 市场分析模块
+  • RICE → 功能优先级模块（自动评分，1位小数）
+  • OKR → 成功指标模块（目标+关键结果）
+  • 风险评估 → 风险与核验模块（标注等级+影响）
+
+<span class="highlight-word">Prompt 工程</span>
+  • 系统 Prompt 约束 JSON 输出，禁止自由文本
+  • 用户消息完整传入所有字段（产品想法+用户+痛点+行业+市场）
+  • 温度 0.7，兼顾稳定性和创造性
+  • 代码容错：从 markdown code block 提取 JSON，缺失字段默认值
+
+<span class="highlight-word">AI 产品设计三原则</span>
+  1. <span class="good">结构化输出 > 自由对话</span>：Tab 布局比对话流更适合汇报
+  2. <span class="good">标注不确定性</span>：估算 vs 事实，置信度，来源
+  3. <span class="good">人机协作</span>：AI 做草稿，人做核验</span></div>
+</div>
+
+<!-- 2.5 用户场景错位 -->
+<div class="card card-red">
+  <h3>2.5 最大反思：用户场景错位 <span class="tag tag-red">体现产品思维</span></h3>
+
+  <div class="script"><span class="highlight-word">发现的问题</span>
+做完 MVP 后我复盘发现：
+用户真正需要的不是"一份报告"，而是"一个可讨论的起点"。
+
+<span class="highlight-word">为什么</span>
+  • PM 做决策需要的是"团队能讨论的草稿"，不是"AI 说的真理"
+  • 报告只是载体，价值在于"能不能快速进入讨论"
+  • 用户反馈"有用"的不是内容本身，而是"省了我 2 小时找框架的时间"
+
+<span class="highlight-word">调整方向</span>
+  • 从"追求报告质量"转向"追求报告可讨论性"
+  • 增加"反馈"按钮（有用/帮助有限），收集真实使用场景
+  • 增加"复制/导出"优先级——让用户能快速带入团队讨论
+  • 增加证据驱动模式——让用户能逐步替换 AI 草稿为真实数据
+
+<span class="highlight-word">后续方向</span>
+  • 报告在线编辑（让用户直接改 AI 草稿，而不是复制到文档）
+  • 团队共享与评论（让报告进入协作流，不是个人产物）
+  • 历史版本对比（让决策有迹可循）
+
+<span class="meta-line">→ 这个反思体现了"产品思维"：用户要的不是功能，而是结果</span></div>
+</div>
+
+<!-- ========== 3. 追问应对 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">3</div>
+  <div>
+    <div class="section-title">三大追问应对</div>
+    <div class="section-subtitle">面试官最可能质疑你的点，每个都准备好</div>
+  </div>
+</div>
+
+<!-- 追问1 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">Q1</span>
+    <span>为什么不直接用 ChatGPT / DeepSeek？你的差异化是什么？</span>
+  </div>
+  <div class="qa-a">
+    <p><strong>答题要点：</strong>差异化不在模型，而在<strong>工作流和可信度设计</strong>。</p>
+    <div class="script"><span class="highlight-word">差异化三层</span>：
+
+<span class="good">第一层：开箱即用 vs 需要 Prompt 工程</span>
+  • 用 ChatGPT：你得自己写 Prompt，自己组织输出格式
+  • 用 InsightAI：填完就出结果，7 个维度自动结构化
+
+<span class="good">第二层：框架内化 vs 用户自学</span>
+  • ChatGPT 不会自动用 RICE 评分，你得告诉它怎么评
+  • InsightAI 把 RICE/OKR/TAM 内化为产品功能
+
+<span class="good">第三层：可信度设计 vs 自由输出</span>
+  • ChatGPT 的输出没有边界标注，用户不知道什么是真的
+  • InsightAI 有"AI 草稿"标注、证据驱动模式、来源挂载
+
+<span class="highlight-word">一句话总结</span>：
+ChatGPT 是"瑞士军刀"，InsightAI 是"PM 专用工具"——
+不是工具比工具强，而是场景比场景准。
+
+<span class="meta-line">→ 不要否定通用 AI，而是说"场景化产品的价值在于把通用能力转化为特定工作流"</span></div>
+  </div>
+</div>
+
+<!-- 追问2 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">Q2</span>
+    <span>你报告里的市场数据是编的吗？怎么证明可信度？</span>
+  </div>
+  <div class="qa-a">
+    <p><strong>答题要点：</strong>先承认"是 AI 估算"，再展示<strong>可信度设计</strong>。</p>
+    <div class="script"><span class="highlight-word">坦诚</span>
+"是的，MVP 阶段的市场数据是 AI 估算的，这也是我最担心的问题。"
+
+<span class="highlight-word">然后讲解决方案</span>：
+我设计了三层可信度机制——
+
+<span class="good">1. 标注边界</span>
+  • 所有估算标注为"估算"，不冒充事实
+  • 显示置信度（高/中/低）和假设前提
+  • 顶部固定提示"这是 AI 草稿"
+
+<span class="good">2. 证据驱动模式</span>（真正的零幻觉方案）
+  • 用户手动录入证据，系统只汇总不编造
+  • 没有来源的模块显示"暂无已核实数据"
+
+<span class="good">3. 自动调研</span>（接 Tavily 检索）
+  • 自动检索真实网页，带来源链接
+  • 但仍提示用户人工复核
+
+<span class="highlight-word">产品理念</span>：
+AI 产品的可信度不是"AI 不犯错"，
+而是"让用户能判断 AI 靠不靠谱"。
+
+<span class="meta-line">→ 这个回答把"缺陷"转化为"设计亮点"</span></div>
+  </div>
+</div>
+
+<!-- 追问3 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">Q3</span>
+    <span>这个项目有真实用户吗？留存怎么样？怎么验证价值？</span>
+  </div>
+  <div class="qa-a">
+    <p><strong>答题要点：</strong>诚实承认作品阶段，展示<strong>验证思路和数据埋点</strong>。</p>
+    <div class="script"><span class="highlight-word">坦诚</span>
+"目前还在作品阶段，没有真实用户数据。这是我作为独立开发者的局限。"
+
+<span class="highlight-word">然后讲</span>我已经做了什么来验证——
+
+<span class="good">1. 数据埋点已设计</span>
+   8 个核心事件：report_generated / tab_viewed / report_exported 等
+   可以追踪用户行为
+
+<span class="good">2. 可度量的目标已设定</span>
+   • 报告生成时间 ≤ 60 秒 ✅（已通过实测）
+   • 报告采纳率 ≥ 60%（用户不修改直接使用）
+   • 次日留存 ≥ 30%
+
+<span class="good">3. 验证思路</span>
+   如果上线，我会做：
+   • 种子用户测试（5-10 个真实 PM）
+   • 可用性测试（完成任务的时间和成功率）
+   • A/B 测试（AI 草稿 vs 证据驱动）
+
+<span class="highlight-word">面试亮点</span>：
+虽然没有真实数据，但我知道"有了数据之后该怎么用"。
+这比"编一个好看的数据"更诚实，也更体现产品思维。
+
+<span class="meta-line">→ 重点是"有度量思维"和"知道怎么验证"，而不是"有数据"</span></div>
+  </div>
+</div>
+
+<!-- ========== 4. STAR 行为面试 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">4</div>
+  <div>
+    <div class="section-title">STAR 行为面试应答</div>
+    <div class="section-subtitle">面试官可能问的 5 类行为问题</div>
+  </div>
+</div>
+
+<!-- STAR 1 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">STAR 1</span>
+    <span>说一个你做产品决策的经历</span>
+  </div>
+  <div class="qa-a">
+    <div class="script"><span class="highlight-word">S</span>：InsightAI 早期，选择"AI 聊天增强"还是"PM 分析工具"
+<span class="highlight-word">T</span>：决定核心价值和差异化
+<span class="highlight-word">A</span>：竞品对比 + 3 位 PM 朋友访谈 + 框架设计
+<span class="highlight-word">R</span>：选择 PM 分析工作流，差异化明确，后续所有功能都基于这个定位
+
+<span class="meta-line">→ 关键：用"数据/用户反馈"支撑决策，不是凭感觉</span></div>
+  </div>
+</div>
+
+<!-- STAR 2 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">STAR 2</span>
+    <span>说一个产品失败或反思的经历</span>
+  </div>
+  <div class="qa-a">
+    <div class="script"><span class="highlight-word">S</span>：MVP 做完后，我发现用户真正需要的不是"一份报告"
+<span class="highlight-word">T</span>：找出真正的用户价值
+<span class="highlight-word">A</span>：复盘用户反馈，发现"可讨论的起点"比"完美报告"更重要
+<span class="highlight-word">R</span>：调整方向——增加反馈、导出、证据驱动模式，让报告进入协作流
+
+<span class="meta-line">→ 关键：反思不是"做错了"，而是"理解更深了"</span></div>
+  </div>
+</div>
+
+<!-- STAR 3 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">STAR 3</span>
+    <span>说一个你与技术协作的经历</span>
+  </div>
+  <div class="qa-a">
+    <div class="script"><span class="highlight-word">S</span>：我是产品负责人，但项目用 Vibe Coding 全栈实现
+<span class="highlight-word">T</span>：确保技术实现符合产品设计
+<span class="highlight-word">A</span>：用 Chrome DevTools 实测每个功能路径，
+      验证 5/5 单元测试通过，0 个浏览器 JS 错误
+<span class="highlight-word">R</span>：产品和技术完全对齐，交付质量可验证
+
+<span class="meta-line">→ 关键：技术理解让我能跟工程师"说同一种语言"</span></div>
+  </div>
+</div>
+
+<!-- STAR 4 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">STAR 4</span>
+    <span>说一个 AI 产品设计的难点</span>
+  </div>
+  <div class="qa-a">
+    <div class="script"><span class="highlight-word">S</span>：AI 输出不稳定，JSON 解析经常失败
+<span class="highlight-word">T</span>：让 AI 输出可被前端可靠解析
+<span class="highlight-word">A</span>：三层容错——
+      1) Prompt 约束"只输出 JSON"
+      2) 从 markdown code block 提取 JSON
+      3) 缺失字段用默认值填充
+<span class="highlight-word">R</span>：解析成功率从 ~60% 提升到 ~95%+
+
+<span class="meta-line">→ 关键：AI 产品的"可用性"需要产品和工程双重设计</span></div>
+  </div>
+</div>
+
+<!-- STAR 5 -->
+<div class="qa">
+  <div class="qa-q">
+    <span class="q-label">STAR 5</span>
+    <span>说一个你如何学习新东西的经历</span>
+  </div>
+  <div class="qa-a">
+    <div class="script"><span class="highlight-word">S</span>：需要在短时间内掌握 Vue3 + Pinia + Vite + DeepSeek API
+<span class="highlight-word">T</span>：独立完成全栈产品
+<span class="highlight-word">A</span>：用 Vibe Coding 快速原型→验证→迭代，
+      同时深入理解每个技术选型的理由
+<span class="highlight-word">R</span>：2 周内完成从 0 到 1，
+      代码量 2724 行，测试 5/5 通过，浏览器 0 错误
+
+<span class="meta-line">→ 关键：学习能力 + 执行力，这是 AI 时代 PM 的核心竞争力</span></div>
+  </div>
+</div>
+
+<!-- ========== 5. 反问环节 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">5</div>
+  <div>
+    <div class="section-title">反问环节</div>
+    <div class="section-subtitle">面试最后一定要问，体现思考深度</div>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>原则：</strong>不要问薪资/假期/加班。问 AI 产品方向、团队期待、成长路径。
+</div>
+
+<div class="card card-accent-left">
+  <h3>推荐问题（按优先级排序）</h3>
+  <ul>
+    <li><strong>"这个岗位的 AI 产品经理，半年内最核心的产出是什么？"</strong>
+      <br><span class="mute">→ 了解岗位期待，展示你关注"产出"而非"流程"</span></li>
+    <li><strong>"团队目前在 AI 产品上最大的挑战是什么？"</strong>
+      <br><span class="mute">→ 展示你理解 AI 产品不是只有机会，还有挑战</span></li>
+    <li><strong>"对 AI 产品经理来说，技术理解需要到什么程度？"</strong>
+      <br><span class="mute">→ 展示你的技术背景是优势，不是劣势</span></li>
+    <li><strong>"公司怎么衡量 AI 产品的成功？"</strong>
+      <br><span class="mute">→ 展示你有数据驱动和结果导向的思维</span></li>
+  </ul>
+</div>
+
+<!-- ========== 6. 话术速查表 ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">6</div>
+  <div>
+    <div class="section-title">话术速查表</div>
+    <div class="section-subtitle">高频问题 → 关键词 → 回答结构</div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th style="width:30%">面试官可能问</th><th style="width:25%">关键词</th><th style="width:45%">回答结构</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>介绍一下你自己</td>
+      <td class="pill-blue">转型 + 项目 + 方向</td>
+      <td>背景 → InsightAI → 两个关注（方法论+边界）</td>
+    </tr>
+    <tr>
+      <td>InsightAI 解决什么问题？</td>
+      <td class="pill-green">PM 痛点 + 效率</td>
+      <td>传统分析 2-4 周 → 1 分钟，7 维度输出</td>
+    </tr>
+    <tr>
+      <td>为什么不直接用 AI 对话？</td>
+      <td class="pill-purple">差异化 + 场景化</td>
+      <td>三层差异：开箱即用→框架内化→可信度设计</td>
+    </tr>
+    <tr>
+      <td>数据是真的吗？</td>
+      <td class="pill-amber">坦诚 + 三层方案</td>
+      <td>承认是估算→标注边界→证据驱动→自动调研</td>
+    </tr>
+    <tr>
+      <td>有真实用户吗？</td>
+      <td class="pill-red">坦诚 + 验证思路</td>
+      <td>作品阶段→埋点已设计→验证思路已明确</td>
+    </tr>
+    <tr>
+      <td>最大反思是什么？</td>
+      <td class="pill-green">用户场景错位</td>
+      <td>用户要的不是报告，是可讨论的起点</td>
+    </tr>
+    <tr>
+      <td>技术怎么实现的？</td>
+      <td class="pill-blue">全栈 + 验证</td>
+      <td>Vue3+Pinia+DeepSeek+Tavily，测试 5/5，0 错误</td>
+    </tr>
+    <tr>
+      <td>为什么用 Vibe Coding？</td>
+      <td class="pill-purple">效率 + 验证</td>
+      <td>AI 工具让我专注产品设计，快速验证想法</td>
+    </tr>
+    <tr>
+      <td>后续迭代方向？</td>
+      <td class="pill-amber">V2+V3 路线图</td>
+      <td>在线编辑→团队协作→版本对比</td>
+    </tr>
+    <tr>
+      <td>你最擅长什么？</td>
+      <td class="pill-blue">AI+产品+技术桥接</td>
+      <td>AI 产品设计 + 技术理解 + 产品思维</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 7. 面试当天 Checklist ========== -->
+<div class="page-break"></div>
+<div class="section-header">
+  <div class="section-num">7</div>
+  <div>
+    <div class="section-title">面试当天 Checklist</div>
+    <div class="section-subtitle">进门前快速过一遍</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>✅ 面试前</h3>
+  <ul>
+    <li>熟悉 30 秒 / 1 分钟 / 3 分钟三个版本的自我介绍</li>
+    <li>记住关键数字：≤60s、5/5 测试、7 维度、0 JS 错误、2724 行代码</li>
+    <li>能流畅讲 2.2 产品边界决策的 STAR 故事</li>
+    <li>能流畅讲 2.3 无幻觉边界的三层设计</li>
+    <li>能流畅讲 2.5 用户场景错位的反思</li>
+    <li>准备好三大追问的应对话术</li>
+    <li>准备好 4 个反问问题</li>
+    <li>确保 InsightAI 项目可访问（GitHub Pages / Vercel）</li>
+    <li>浏览器打开项目演示页，随时展示</li>
+    <li>检查简历上所有项目描述，确保与实际代码一致</li>
+  </ul>
+</div>
+
+<div class="card card-accent-left">
+  <h3>🎯 面试中</h3>
+  <ul>
+    <li><strong>结构先行</strong>：回答先说结论，再展开细节</li>
+    <li><strong>数据支撑</strong>：尽量用数字说话，避免模糊表述</li>
+    <li><strong>坦诚 > 回避</strong>：没有的就诚实说，重点讲"怎么验证"</li>
+    <li><strong>差异化 > 跟随</strong>：不要说"跟 ChatGPT 一样"，要说"跟 ChatGPT 不一样"</li>
+    <li><strong>反思 > 成就</strong>：面试官喜欢听你学到了什么，而不是你多厉害</li>
+    <li><strong>节奏把控</strong>：每个回答 2-3 分钟，不要被追问 10 分钟</li>
+    <li><strong>反问环节</strong>：最后一定要问 1-2 个问题</li>
+  </ul>
+</div>
+
+<div class="card card-green">
+  <h3>💡 核心记忆点</h3>
+  <div class="insight">
+    <strong>一句话记住 InsightAI：</strong><br>
+    "InsightAI 不是 AI 聊天工具，而是 PM 分析工作流的产品化——
+    把 TAM/RICE/OKR 这些方法论变成开箱即用的功能，
+    同时设计无幻觉边界，让用户能判断 AI 靠不靠谱。"
+  </div>
+</div>
+
+<div class="handbook-footer">
+  InsightAI 面试话术手册 · 常奥青 · AI 产品经理岗位<br>
+  基于 PRD V1.0 + 简历 + Chrome DevTools 实测数据生成<br>
+  ⚠️ 本手册为面试准备材料，实际使用请灵活调整
+</div>
+
+</div>
+
+</body>
+</html>
