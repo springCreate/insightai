@@ -1,6 +1,6 @@
 # InsightAI - AI 驱动的产品洞察草稿平台
 
-> 应聘 AI 产品经理的 vibe coding 作品
+> 针对 AI 产品经理的 vibe coding 作品
 > 技术栈：Vue 3 + Pinia + Vue Router 4 + Vite + DeepSeek API + Tavily 检索
 
 ## 项目概述
